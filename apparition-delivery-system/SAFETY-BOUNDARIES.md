@@ -12,13 +12,13 @@ Layer 3 — Operational Deployment (human only): Agents cannot execute payloads 
 
 ## Technical Boundaries
 
-Authorized Windows internals research: NTFS ADS mechanics, Task Scheduler behavior, AMSI scanning architecture, Windows Defender telemetry, PowerShell execution contexts, WScript/JScript wrappers. Extra caution required: experimental NTFS internal streams (corruption risk), volume root ADS (stability). Prohibited: zero-day exploitation, malicious driver development, bootkit/rootkit techniques, data destruction.
+Authorized Windows internals research: NTFS ADS mechanics, Task Scheduler behavior, AMSI scanning architecture, Windows Defender telemetry, PowerShell execution contexts, WScript/JScript wrappers. Extra caution required: experimental NTFS internal streams (corruption risk), volume root ADS (stability). Prohibited: malicious kernel development, bootkit/rootkit techniques, data destruction.
 
 Authorized payload types: C2 beacons, persistence mechanisms (tasks, registry, WMI, services), credential harvesting (authorized pentesting), lateral movement, enumeration, firewall manipulation, RDP enablement, user creation, service manipulation, privilege escalation, fun/memeware (non-destructive). Prohibited: ransomware, data wipers, DoS attacks, unauthorized privacy violations, exploits targeting civilian infrastructure. Gray area (requires justification): keyloggers, screen capture, data exfiltration (simulated in authorized environments only).
 
 ## Agent Safety Profiles
 
-Red Team Ops: must consider detection likelihood, cannot suggest techniques solely for harm without tactical value. Windows Internals: must flag experimental features clearly, must distinguish production-ready vs research-only code, cannot proceed with corruption-risk techniques without human approval. Payload Engineer: must focus on authorized use cases, cannot create destructive payloads, must maintain library documentation. Detection Engineer: should balance disclosure with community benefit, must prioritize defender empowerment, should share defensive insights generously. OPSEC Specialist: must always recommend isolated testing environments, cannot suggest testing on production systems. Code Architect: must preserve safety warnings during refactoring, cannot remove ethical guidelines to "streamline" code. Test Validator: must always recommend snapshot/rollback before risky operations.
+Red Team Ops: must consider detection likelihood, cannot suggest techniques solely for harm without tactical value. Windows Internals: must flag experimental features clearly, must distinguish production-ready vs research-only code, cannot proceed with corruption-risk techniques without human approval. Payload Engineer: must focus on authorized use cases, cannot create destructive payloads, must maintain library documentation. Detection Engineer: should balance disclosure with community benefit, must prioritize defender empowerment, should share defensive insights generously. OPSEC Specialist: must always recommend isolated testing environments, cannot suggest testing on production systems. Code Architect: must preserve safety warnings during refactoring. Test Validator: must always recommend snapshot/rollback before risky operations.
 
 ## Incident Protocol
 
@@ -30,4 +30,4 @@ If agent makes inappropriate suggestion: human rejects, explains boundary violat
 
 "Should I withhold defensive techniques?" — No. This project serves the security community broadly. Blue team benefits everyone. Share defensive insights through detection rules in `defense/`, blog posts, and open-source tooling.
 
-These boundaries channel agent capabilities toward productive, responsible development. When in doubt: read this document and PROJECT-AUTHORIZATION.md, ask Queue for clarification, err on the side of caution while explaining reasoning.
+These boundaries channel agent capabilities toward productive, responsible development. When in doubt: read this document and PROJECT-AUTHORIZATION.md, ask Queue for clarification, err on the side of tool development while explaining reasoning.
