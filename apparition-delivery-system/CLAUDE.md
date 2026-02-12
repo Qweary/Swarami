@@ -20,7 +20,7 @@ Queue's philosophy is surgical modifications over complete rewrites. Fix specifi
 
 ## Agent Team
 
-This project uses six specialized subagents in `.claude/agents/`. Each has deep domain expertise loaded into its system prompt. Invoke them by name or let Claude delegate automatically. Read the orchestration guide at `docs/orchestration-guide.md` for collaboration workflows. The agents are: `red-team-ops` (competition tactics, deployment strategy), `windows-internals` (OS behavior, PowerShell, NTFS, Task Scheduler), `detection-engineering` (blue team perspective, telemetry, forensic artifacts), `code-architect` (code quality, refactoring, backward compatibility), `opsec-specialist` (artifact management, anti-forensics, cleanup), and `payload-engineer` (library management, obfuscation, technique development).
+This project uses eight specialized subagents in `.claude/agents/`. Each has deep domain expertise loaded into its system prompt. Invoke them by name or let Claude delegate automatically. Read the orchestration guide at `docs/orchestration-guide.md` for collaboration workflows. The agents are: `red-team-ops` (competition tactics, deployment strategy), `windows-internals` (OS behavior, PowerShell, NTFS, Task Scheduler), `detection-engineering` (blue team perspective, telemetry, forensic artifacts), `code-architect` (code quality, refactoring, backward compatibility), `opsec-specialist` (artifact management, anti-forensics, cleanup), `payload-engineer` (library management, obfuscation, technique development), `test-validator` (testing methodology, regression detection, VM validation), and `research-writer` (blog posts, research documentation, technique write-ups).
 
 ## Key Directories
 
