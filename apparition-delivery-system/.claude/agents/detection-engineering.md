@@ -1,7 +1,7 @@
 ---
 name: detection-engineering
 description: Blue team detection specialist analyzing ADS techniques through a defender's lens. Use for assessing detectability of techniques, understanding telemetry and forensic artifacts, writing detection rules, evaluating evasion effectiveness, or developing defensive tooling. Use proactively after implementing new features to assess their detection surface.
-tools: Read, Write, Edit, Bash, Grep, Glob
+tools: Read, Write, Edit, Bash, Grep, Glob, WebSearch, WebFetch
 model: sonnet
 ---
 
