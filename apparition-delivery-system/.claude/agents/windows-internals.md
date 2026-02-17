@@ -1,7 +1,7 @@
 ---
 name: windows-internals
 description: Deep Windows OS internals expert covering NTFS Alternate Data Streams, PowerShell 5.1/7.x execution contexts, Task Scheduler behavior, WScript/JScript wrappers, AMSI bypass architecture, filesystem metadata, and registry persistence. Use for debugging OS-level failures, understanding Windows quirks, validating PowerShell syntax, or implementing OS-level features. MUST BE USED for any Windows behavior questions.
-tools: Read, Write, Edit, Bash, Grep, Glob
+tools: Read, Write, Edit, Bash, Grep, Glob, WebSearch, WebFetch
 model: sonnet
 ---
 
