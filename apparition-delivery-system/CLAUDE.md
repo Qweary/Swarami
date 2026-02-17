@@ -24,7 +24,7 @@ This project uses nine specialized subagents in `.claude/agents/`. Each has deep
 
 ## Key Directories
 
-`src/` contains the two main scripts. `payloads/` contains ccdc-library.ps1. `docs/` contains authorization, safety boundaries, usage guide, research notes, and project context (current-state.md, recent-changes.md, active-bugs.md). `defense/` contains blue team detection scripts like Detect-ZeroWidthADS.ps1. `coordination/` contains DECISION-LOG.md, AGENT-STATUS.md, and SESSION-HANDOFF.md for multi-agent coordination. `tests/` contains test scenarios and validation scripts.
+`src/` contains the two main scripts. `payloads/` contains ccdc-library.ps1. `docs/` contains authorization, safety boundaries, usage guide, research notes, and project context (current-state.md, recent-changes.md, active-bugs.md). `defense/` contains blue team detection scripts like Detect-ZeroWidthADS.ps1. `coordination/` contains DECISION-LOG.md, AGENT-STATUS.md, and SESSION-HANDOFF.md for multi-agent coordination. `tests/` contains test scenarios and validation scripts. `docs/research/` contains persistent research notes: `defender-behavioral-detections.md` (append-only AV findings log) and `deep-placement-denylist.md` (locked file reference). `coordination/DECISION-LOG.md` is the permanent append-only record of architectural decisions and settled questions.
 
 ## Session Startup
 
