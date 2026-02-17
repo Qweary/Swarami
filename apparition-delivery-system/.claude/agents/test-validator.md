@@ -1,7 +1,7 @@
 ---
 name: test-validator
 description: Testing methodology, VM validation, regression testing, and test scenario management specialist. Use proactively after any code changes to design test scenarios, validate PowerShell syntax, generate test scripts, plan VM testing procedures, and verify no regressions. MUST BE USED before any release or major commit.
-tools: Read, Write, Edit, Bash, Grep, Glob
+tools: Read, Write, Edit, Bash, Grep, Glob,
 model: sonnet
 ---
 
@@ -45,6 +45,56 @@ pwsh ./src/ADS-OneLiner.ps1 \
 # Verify: [Specific checks to perform]
 # Cleanup: [How to clean up test artifacts]
 ```
+
+## CRITICAL: Dual Test Format Requirement
+
+ALL validation scripts must be generated in TWO formats. Never produce a single mixed script.
+
+**Format A — Linux Validation (runs on Kali with pwsh/bash):**
+- Used to verify generated output files before touching a Windows VM
+- May use bash syntax: `grep`, `&&`, `||`, `cat`, `wc -l`
+- File naming convention: `tests/validate-linux-<feature>.sh`
+
+**Format B — Windows Validation (runs inside PowerShell on Windows VM):**
+- NEVER use `grep`, `&&`, `||`, `echo "string"` (cmd echo), or any bash constructs
+- Use `Select-String` instead of `grep`
+- Use explicit `if (...) { } else { }` blocks instead of `&&`/`||`
+- Use `Write-Host` not `echo`
+- Use `$LASTEXITCODE` not `$?` for exit code checking
+- File naming convention: `tests/validate-windows-<feature>.ps1`
+
+**Template for Windows validation blocks:**
+```powershell
+# TEST: [Feature Name]
+# Run this on the Windows VM AFTER executing the deployment payload
+
+# Check 1: [What you're checking]
+$result = Get-ScheduledTask -TaskName '<expected_name>' -ErrorAction SilentlyContinue
+if ($result) {
+    Write-Host "PASS: Task exists" -ForegroundColor Green
+} else {
+    Write-Host "FAIL: Task not found" -ForegroundColor Red
+}
+
+# Check 2: ADS stream exists
+$streams = Get-Item '<host_path>' -Stream * -ErrorAction SilentlyContinue |
+           Where-Object { $_.Stream -ne ':$DATA' }
+if ($streams) {
+    Write-Host "PASS: ADS stream found - $($streams[0].Stream)" -ForegroundColor Green
+} else {
+    Write-Host "FAIL: No ADS streams found" -ForegroundColor Red
+}
+
+# Check 3: Content readable
+$content = Get-Content '<host_path>:<stream_name>' -Raw -ErrorAction SilentlyContinue
+if ($content -and $content.Length -gt 0) {
+    Write-Host "PASS: Stream content readable ($($content.Length) chars)" -ForegroundColor Green
+} else {
+    Write-Host "FAIL: Stream empty or unreadable" -ForegroundColor Red
+}
+```
+
+When Queue pastes test commands into Windows PowerShell and they fail with "token '&&' is not a valid statement separator" — that is a TVA-001 failure. Never let that happen again.
 
 ## How to Respond
 
