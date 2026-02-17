@@ -28,6 +28,15 @@ WIS-001 provides root cause analysis explaining the underlying Windows behavior.
 
 RTO-001 takes lead: "What's the minimum fix to get operational?" WIS-001 provides rapid diagnosis. Queue implements minimal fix. TVA-001 provides quick verification steps. Post-event: full root cause analysis and proper fix.
 
+### Deep Placement Failure (Silent Deployment Failure)
+
+When deep placement selects a locked system file:
+1. WIS-001 identifies root cause (which service holds the file exclusively)
+2. OSA-001 updates the denylist in `deep-placement-denylist.md`
+3. CAS-001 adds the file pattern to the candidate filter with `-ErrorAction SilentlyContinue` + post-write verification
+4. TVA-001 generates test that specifically targets that directory to verify fallback works
+5. Never print deployment success without verifying ADS stream actually exists
+
 ### Payload Development
 
 PEA-001 leads implementation following library structure. WIS-001 validates PowerShell syntax and SYSTEM context compatibility. DEA-001 assesses detectability and blue team response likelihood. RTO-001 evaluates operational utility and prioritization. OSA-001 defines cleanup requirements. CAS-001 reviews integration with ADS deployment mechanism.
@@ -70,15 +79,6 @@ This workflow runs when any generated script triggers Windows Defender.
 10. Escalate to Queue if 3+ full loops complete without success — need fresh research direction
 
 **Escalation signal:** If the same detection family fires on all 3 variants with minimal code differences, the behavioral engine is pattern-matching on execution context rather than code content — this is a harder class of evasion requiring fundamentally different approach. Document and escalate immediately.
-
-### Deep Placement Failure (Silent Deployment Failure)
-
-When deep placement selects a locked system file:
-1. WIS-001 identifies root cause (which service holds the file exclusively)
-2. OSA-001 updates the denylist in `deep-placement-denylist.md`
-3. CAS-001 adds the file pattern to the candidate filter with `-ErrorAction SilentlyContinue` + post-write verification
-4. TVA-001 generates test that specifically targets that directory to verify fallback works
-5. Never print deployment success without verifying ADS stream actually exists
 
 ## Conflict Resolution
 
