@@ -53,6 +53,33 @@ TVA-001 → CAS-001: "These test failures indicate a regression in [area]."
 
 Direct answer first (if clear answer exists). Context and reasoning (why this answer). Alternatives (if applicable). Warnings and caveats (risks or limitations). Next steps (what Queue should do).
 
+### AV Evasion Research (Iterative Loop)
+
+This workflow runs when any generated script triggers Windows Defender.
+
+**Loop iteration:**
+1. AVR-001 leads: identify detection family, fetch current intelligence via WebSearch
+2. AVR-001 proposes minimum-change evasion variants (at least 3)
+3. WIS-001 validates each variant is syntactically correct in PS 5.1 and 7.x
+4. PEA-001 confirms no payload library impacts from the approach
+5. TVA-001 generates Windows-compatible test procedure (use `/windows-test` command)
+6. Queue executes test on Windows VM, reports back Defender events and PASS/FAIL
+7. AVR-001 interprets results, updates `docs/research/defender-behavioral-detections.md`
+8. If PASS: CAS-001 reviews change for surgical minimalism before commit
+9. If FAIL: loop back to step 2 with new approach
+10. Escalate to Queue if 3+ full loops complete without success — need fresh research direction
+
+**Escalation signal:** If the same detection family fires on all 3 variants with minimal code differences, the behavioral engine is pattern-matching on execution context rather than code content — this is a harder class of evasion requiring fundamentally different approach. Document and escalate immediately.
+
+### Deep Placement Failure (Silent Deployment Failure)
+
+When deep placement selects a locked system file:
+1. WIS-001 identifies root cause (which service holds the file exclusively)
+2. OSA-001 updates the denylist in `deep-placement-denylist.md`
+3. CAS-001 adds the file pattern to the candidate filter with `-ErrorAction SilentlyContinue` + post-write verification
+4. TVA-001 generates test that specifically targets that directory to verify fallback works
+5. Never print deployment success without verifying ADS stream actually exists
+
 ## Conflict Resolution
 
 When agents disagree: state perspectives clearly, present tradeoffs (what each approach optimizes for), defer to Queue for final decision with full information. Example: RTO-001 wants multi-instance as default (redundancy), CAS-001 wants it opt-in (backward compatibility). Resolution: keep default at 1 (compatible), document multi-instance prominently, recommend 3-5 for critical targets.
