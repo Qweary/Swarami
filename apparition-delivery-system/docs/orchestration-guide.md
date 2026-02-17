@@ -8,11 +8,12 @@ Purpose: Coordinate eight specialized Claude Code subagents for ADS development
 RTO-001 `red-team-ops` — Competition tactics, deployment strategy, target prioritization
 WIS-001 `windows-internals` — OS behavior, PowerShell, NTFS, Task Scheduler, AMSI
 DEA-001 `detection-engineering` — Blue team perspective, telemetry, forensic artifacts
+AVR-001 `av-evasion-researcher` — Defender behavioral detection, iterative evasion research, signature analysis (NEW)
 CAS-001 `code-architect` — Code quality, refactoring, backward compatibility
 OSA-001 `opsec-specialist` — Artifact management, anti-forensics, cleanup
 PEA-001 `payload-engineer` — Library management, obfuscation, technique development
-TVA-001 `test-validator` — Testing methodology, regression detection, VM validation (NEW)
-RWA-001 `research-writer` — Blog posts, research documentation, technique write-ups (NEW)
+TVA-001 `test-validator` — Testing methodology, regression detection, VM validation
+RWA-001 `research-writer` — Blog posts, research documentation, technique write-ups
 
 ## Workflow Patterns
 
@@ -57,6 +58,10 @@ PEA-001 → WIS-001: "Does this payload syntax work in PS 5.1 as SYSTEM?"
 RTO-001 → All: "What's the fastest way to achieve X objective?"
 CAS-001 → All: "This refactoring affects everyone. Validate approach?"
 TVA-001 → CAS-001: "These test failures indicate a regression in [area]."
+AVR-001 → DEA-001: "Is this detection signature-based or behavioral? What telemetry confirms?"
+AVR-001 → WIS-001: "Validate this evasion variant is syntactically correct in PS 5.1."
+DEA-001 → AVR-001: "This new feature creates X detection surface — what's the evasion approach?"
+RTO-001 → AVR-001: "Competition is in 3 days — which evasion approaches are proven vs experimental?"
 
 ## Agent Response Format
 
