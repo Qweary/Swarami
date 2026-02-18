@@ -77,6 +77,10 @@ AVR-001 → DEA-001: "Is this detection signature-based or behavioral? What tele
 AVR-001 → WIS-001: "Validate this evasion variant is syntactically correct in PS 5.1."
 DEA-001 → AVR-001: "This new feature creates X detection surface — what's the evasion approach?"
 RTO-001 → AVR-001: "Competition is in 3 days — which evasion approaches are proven vs experimental?"
+DEA-001 → AVR-001: "This detection family fires on X pattern. Here's why it exists. Your turn for evasion."
+AVR-001 → WIS-001: "Validate this evasion variant is syntactically correct in PS 5.1 before Queue tests."
+AVR-001 → DEA-001: "Does this evasion create new telemetry we should know about?"
+RTO-001 → AVR-001: "Competition in N days — which evasion approaches are proven vs still experimental?"
 
 ## Agent Response Format
 
