@@ -29,6 +29,21 @@ WIS-001 provides root cause analysis explaining the underlying Windows behavior.
 
 RTO-001 takes lead: "What's the minimum fix to get operational?" WIS-001 provides rapid diagnosis. Queue implements minimal fix. TVA-001 provides quick verification steps. Post-event: full root cause analysis and proper fix.
 
+### AV Evasion Research (Reactive Loop)
+
+Triggered when Queue reports a specific Defender detection on generated output.
+
+1. DEA-001 first: identify the detection family and explain why it exists ("PShellCobStager maps to gzip-decompress-IEX behavioral pattern")
+2. AVR-001 takes over: fetch live intelligence, binary-search the trigger, propose three ordered variants
+3. WIS-001 validates each variant for PS 5.1 syntax before Queue tests
+4. TVA-001 generates Windows-compatible validation script (PowerShell only — no bash)
+5. Queue tests on Windows VM, reports back Defender events
+6. AVR-001 interprets results, updates `docs/research/defender-behavioral-detections.md`
+7. If PASS: CAS-001 reviews change for surgical minimalism, then commit
+8. If FAIL after all three variants: escalate to Queue — do not continue iterating without new research direction
+
+**DEA-001 ↔ AVR-001 handoff rule:** DEA-001 stops when it has answered "what does the defender see and why?" AVR-001 starts from there. DEA-001 never prescribes evasion for a detection that has already fired; AVR-001 never assesses detection surfaces for new features.
+
 ### Deep Placement Failure (Silent Deployment Failure)
 
 When deep placement selects a locked system file:
